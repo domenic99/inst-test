@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Job requests', type: :request do
-  describe 'GET /jobs' do
+  describe 'GET /api/v1/jobs' do
     let(:job) { create(:job) }
 
     before do

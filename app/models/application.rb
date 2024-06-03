@@ -8,6 +8,8 @@ class Application < ApplicationRecord
 
   belongs_to :job
   has_many :application_events, class_name: 'Application::Event', dependent: :destroy
+  has_many :notes, class_name: 'Application::Event::Note'
+  has_many :interviews, class_name: 'Application::Event::Interview'
 
   def self.hired
     joins(:application_events)
