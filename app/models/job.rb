@@ -2,7 +2,7 @@ class Job < ApplicationRecord
   DEFAULT_JOB_STATUS = :deactivated
   STATUS_MAPPING = {
     'Job::Event::Activate' => :activated,
-    'Job::Event::Deactivated' => :deactivated,
+    'Job::Event::Deactivated' => :deactivated
   }.freeze
 
   has_many :applications, dependent: :destroy
