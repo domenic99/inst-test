@@ -1,5 +1,6 @@
-class Api::V1::ApplicationsController < ApplicationController
+class Api::V1::JobsController < ApplicationController
   def index
-
+    jobs = Job.all
+    render json: jobs
   end
 end
