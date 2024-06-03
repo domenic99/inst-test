@@ -9,6 +9,22 @@ class Application < ApplicationRecord
   belongs_to :job
   has_many :application_events, class_name: 'Application::Event', dependent: :destroy
 
+  def self.hired
+    joins(:application_events)
+      .where(application_events: { id: Application::Event.select('MAX(application_events.id) as id').status_affecting
+                                                         .group(:application_id), type: 'Application::Event::Hire' })
+  end
+
+  def self.rejected
+    joins(:application_events)
+      .where(application_events: { id: Application::Event.select('MAX(application_events.id) as id').status_affecting
+                                                         .group(:application_id), type: 'Application::Event::Reject' })
+  end
+
+  def self.ongoing
+    where.not(id: rejected).where.not(id: hired)
+  end
+
   def status
     status_event = application_events.where.not(type: 'Application::Event::Note').last
 
